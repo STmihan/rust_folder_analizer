@@ -10,7 +10,7 @@ use crate::sorting::{sep_files_by_ext, sort_by_name, sort_by_size, sort_hashmap_
 
 fn get_all_files_in_path(path: String, files: &mut Vec<(String, u64)>) {
     let path = format!("{}/**/*", path);
-    let mut result = glob::glob(path.as_str()).unwrap();
+    let result = glob::glob(path.as_str()).unwrap();
     let mut counter = 0;
     for entry in result {
         println!("processing file {}", counter);
@@ -29,7 +29,7 @@ fn add_result(result: &mut String, file: (String, u64)) {
     let raw = file.1.clone();
     let kb = file.1 as f64 / 1024.0;
     let mb = file.1 as f64 / 1024.0 / 1024.0;
-    let mut formatted = String::new();
+    let mut formatted;
     formatted = format!("{:.2} MB", mb);
     if mb < 1.0 {
         formatted = format!("{:.2} KB", kb);
