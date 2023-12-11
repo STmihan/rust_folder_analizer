@@ -9,7 +9,8 @@ use crate::print_help::print_help;
 use crate::sorting::{sep_files_by_ext, sort_by_name, sort_by_size, sort_hashmap_by_value};
 
 fn get_all_files_in_path(path: String, files: &mut Vec<(String, u64)>) {
-    let result = glob::glob(path.as_str()).unwrap();
+    let path = format!("{}/**/*", path);
+    let mut result = glob::glob(path.as_str()).unwrap();
     let mut counter = 0;
     for entry in result {
         println!("processing file {}", counter);
